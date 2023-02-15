@@ -59,7 +59,6 @@ with st.container():
     left.header('Overall View')
     left.dataframe(subset)
     
-    
     right.header('No. of Medals by Year')
     right.line_chart(line_data)
     
@@ -67,4 +66,4 @@ with st.container():
     left.bar_chart(bar_data)
        
    left.header('Area Chart Visual')
-   left.area_chart(chart_data)
+   left.area_chart(subset)
