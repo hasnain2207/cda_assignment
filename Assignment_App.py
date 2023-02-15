@@ -8,7 +8,7 @@ Created on Sat Feb 11 22:58:33 2023
 import pandas as pd
 import numpy as np
 import streamlit as st
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 st.set_page_config(layout="wide")
 
 SHEET_ID_ATHLETE = '1n6ZVKylpKBgwZ1wA7LYZ1g-McGwyRlRSTYcbY9mmFxk'
@@ -83,12 +83,12 @@ with st.container():
     left.header('Medals won by no. of participations')
     left.bar_chart(bar_data)
     
-    arr = np.random.normal(1, 1, size=100)
-    fig, ax = plt.subplots()
-    ax.hist(arr, bins=20)
+    #arr = np.random.normal(1, 1, size=100)
+   # fig, ax = plt.subplots()
+   # ax.hist(arr, bins=20)
     
-    right.header('Histogram Visual')
-    right.pyplot(fig)
+   # right.header('Histogram Visual')
+   # right.pyplot(fig)
     
-    left.header('Area Chart Visual')
-    left.area_chart(chart_data)
+   # left.header('Area Chart Visual')
+   # left.area_chart(chart_data)
