@@ -60,7 +60,7 @@ col5.metric('Bronze Medals', bronze)
 
 bar_data = data.groupby('Medal')['Name'].count().sort_values(ascending=False).head(10)
 line_data = data.groupby('Year')['Medal'].count().sort_values(ascending=False).head(10)
-
+st.dataframe(line_data)
 with st.container():
     left, right = st.columns(2)
     right.header('No. of Medals by Year')
