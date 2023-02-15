@@ -71,7 +71,7 @@ with st.container():
     # for dataframe styling, e.g. highlighting max values in a df, refer to the following link: https://docs.streamlit.io/library/api-reference/data/st.dataframe
     df = pd.DataFrame(np.random.randn(10, 10), columns=('col %d' % i for i in range(10)))
     left.header('Tabular View')
-    left.dataframe(df.style.highlight_max(axis=0))
+    left.dataframe(subset)
     
     
     # creating visuals
