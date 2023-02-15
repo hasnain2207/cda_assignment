@@ -25,7 +25,7 @@ df1 = pd.read_csv(url1)
 df2 = pd.read_csv(url2)
 
 data = pd.merge(df1, df2)
-
+data['Year'] = data['Year'].astype('int')
 #data.isna().any()
 
 data.info()
