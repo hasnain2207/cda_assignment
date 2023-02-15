@@ -62,15 +62,16 @@ bar_data = data.groupby('Medal')['Name'].count().sort_values(ascending=False).he
 line_data = data.groupby('Year')['Medal'].count().sort_values(ascending=False).head(10)
 
 with st.container():
-    left, right = st.columns(2)
-    left.header('Overall View')
-    left.dataframe(subset)
     
     right.header('No. of Medals by Year')
     right.line_chart(line_data)
     
     left.header('Medals Won by No. of Participations')
     left.bar_chart(bar_data)
+        
+    left, right = st.columns(2)
+    left.header('Overall View')
+    left.dataframe(subset)
        
    #left.header('Area Chart Visual')
    #left.area_chart(subset)
