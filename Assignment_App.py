@@ -21,7 +21,7 @@ url2 = f'https://docs.google.com/spreadsheets/d/{SHEET_ID_REGION}/gviz/tq?tqx=ou
 #file1 = r'C:\Users\Lenovo\Desktop\Class 1 Python\Assignments\3rd Assignment\archive (1)\athlete_events.csv'
 df1 = pd.read_csv(url1)
 
-file2 = r'C:\Users\Lenovo\Desktop\Class 1 Python\Assignments\3rd Assignment\archive (1)\noc_regions.csv'
+#file2 = r'C:\Users\Lenovo\Desktop\Class 1 Python\Assignments\3rd Assignment\archive (1)\noc_regions.csv'
 df2 = pd.read_csv(url2)
 
 data = pd.merge(df1, df2)
