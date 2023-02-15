@@ -38,18 +38,6 @@ gold = data.Medal.value_counts().Gold
 silver = data.Medal.value_counts().Silver
 bronze = data.Medal.value_counts().Bronze
 
-
-curr_count = 100
-inc_count = 10
-
-curr_medals = 50
-inc_medals = -4
-
-country_count = 14
-inc_count = 5
-
-
-
 st.header('Olympic History Dashboard')
 col1, col2, col3, col4, col5 = st.columns(5)
 Years = data['Year'].unique()
@@ -68,27 +56,15 @@ line_data = data.groupby('Year')['Medal'].count().sort_values(ascending=False).h
 
 with st.container():
     left, right = st.columns(2)
-    # for dataframe styling, e.g. highlighting max values in a df, refer to the following link: https://docs.streamlit.io/library/api-reference/data/st.dataframe
-    df = pd.DataFrame(np.random.randn(10, 10), columns=('col %d' % i for i in range(10)))
-    left.header('Tabular View')
+    left.header('Overall View')
     left.dataframe(subset)
     
     
-    # creating visuals
-    chart_data = pd.DataFrame(data['Year'],
-        columns=['Medal'])
-    right.header('Line Chart Visual')
+    right.header('No. of Medals by Year')
     right.line_chart(line_data)
     
-    left.header('Medals won by no. of participations')
+    left.header('Medals Won by No. of Participations')
     left.bar_chart(bar_data)
-    
-    #arr = np.random.normal(1, 1, size=100)
-   # fig, ax = plt.subplots()
-   # ax.hist(arr, bins=20)
-    
-   # right.header('Histogram Visual')
-   # right.pyplot(fig)
-    
-   # left.header('Area Chart Visual')
-   # left.area_chart(chart_data)
+       
+   left.header('Area Chart Visual')
+   left.area_chart(chart_data)
