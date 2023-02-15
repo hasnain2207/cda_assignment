@@ -16,18 +16,20 @@ df1 = pd.read_csv(file1)
 
 file2 = r'C:\Users\Lenovo\Desktop\Class 1 Python\Assignments\3rd Assignment\archive (1)\noc_regions.csv'
 df2 = pd.read_csv(file2)
+
 data = pd.merge(df1, df2)
 
-data.isna().any()
+#data.isna().any()
 
 data.info()
 #df = data.drop(['notes'],axis=1)
 
 total_participations = data['ID'].count()
-gold_medals = data[data['Medal'] == 'Gold']
-h = data['Medal'](gold_medals.count())
-
-st.metric(label="Total Participations", value=total_participations)
+total_olympians = data['ID'].nunique()
+countries = data['NOC'].nunique()
+gold = data.Medal.value_counts().Gold
+silver = data.Medal.value_counts().Silver
+bronze = data.Medal.value_counts().Bronze
 
 
 curr_count = 100
@@ -38,10 +40,48 @@ inc_medals = -4
 
 country_count = 14
 inc_count = 5
+
+
+
 st.header('Olympic History Dashboard')
 col1, col2, col3, col4, col5 = st.columns(5)
-col1.metric('Number of Olympians', curr_count, inc_count)
-col2.metric('Participating Countries', country_count, inc_count)
-col3.metric('Gold Medals', curr_medals, inc_medals)
-col4.metric('Silver Medals', curr_medals, inc_medals)
-col5.metric('Bronze Medals', curr_medals, inc_medals)
+Years = data['Year'].unique()
+selection = st.selectbox('Select Year', Years)
+subset = data[data['Year'] == selection]
+st.dataframe(subset)
+
+col1.metric('Number of Participations', total_participations)
+col2.metric('Number of Olympians', total_olympians)
+col3.metric('Gold Medals', gold)
+col4.metric('Silver Medals', silver)
+col5.metric('Bronze Medals', bronze)
+
+bar_data = data.groupby('Medal')['Name'].count().sort_values(ascending=False).head(10)
+line_data = data.groupby('Year')['Medal'].count().sort_values(ascending=False).head(10)
+
+with st.container():
+    left, right = st.columns(2)
+    # for dataframe styling, e.g. highlighting max values in a df, refer to the following link: https://docs.streamlit.io/library/api-reference/data/st.dataframe
+    df = pd.DataFrame(np.random.randn(10, 10), columns=('col %d' % i for i in range(10)))
+    left.header('Tabular View')
+    left.dataframe(df.style.highlight_max(axis=0))
+    
+    
+    # creating visuals
+    chart_data = pd.DataFrame(data['Year'],
+        columns=['Medal'])
+    right.header('Line Chart Visual')
+    right.line_chart(line_data)
+    
+    left.header('Medals won by no. of participations')
+    left.bar_chart(bar_data)
+    
+    arr = np.random.normal(1, 1, size=100)
+    fig, ax = plt.subplots()
+    ax.hist(arr, bins=20)
+    
+    right.header('Histogram Visual')
+    right.pyplot(fig)
+    
+    left.header('Area Chart Visual')
+    left.area_chart(chart_data)
