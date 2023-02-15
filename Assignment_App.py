@@ -25,7 +25,6 @@ df1 = pd.read_csv(url1)
 df2 = pd.read_csv(url2)
 
 data = pd.merge(df1, df2)
-data['Year'] = data['Year'].astype('int')
 #data.isna().any()
 
 data.info()
@@ -59,8 +58,10 @@ col4.metric('Silver Medals', silver)
 col5.metric('Bronze Medals', bronze)
 
 bar_data = data.groupby('Medal')['Name'].count().sort_values(ascending=False).head(10)
-line_data = data.groupby('Year')['Medal'].count().sort_values(ascending=False).head(10)
-st.dataframe(line_data)
+#line_data = data.groupby('Year')['Medal'].count().sort_values(ascending=False).head(10)
+line_data = pd.crosstab(data['Year'], data['Medal'])
+
+#st.dataframe(line_data)
 with st.container():
     left, right = st.columns(2)
     right.header('No. of Medals by Year')
