@@ -8,7 +8,7 @@ Created on Sat Feb 11 22:58:33 2023
 import pandas as pd
 import numpy as np
 import streamlit as st
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 st.set_page_config(layout="wide")
 
 SHEET_ID_ATHLETE = '1n6ZVKylpKBgwZ1wA7LYZ1g-McGwyRlRSTYcbY9mmFxk'
