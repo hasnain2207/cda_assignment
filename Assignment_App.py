@@ -41,7 +41,12 @@ bronze = data.Medal.value_counts().Bronze
 st.header('Olympic History Dashboard')
 col1, col2, col3, col4, col5 = st.columns(5)
 Years = data['Year'].unique()
-selection = st.multiselect('Select Year', Years)
+#selection = st.multiselect('Select Year', Years)
+
+selection = st.multiselect(
+    "Select Type:",
+        options = Years,
+        default = Years)
 subset = data[data['Year'] == selection]
 st.dataframe(subset)
 
