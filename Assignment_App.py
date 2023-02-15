@@ -69,8 +69,8 @@ with st.container():
     left.header('Medals Won by No. of Participations')
     left.bar_chart(bar_data)
         
-    left.header('Overall View')
-    left.dataframe(subset)
+st.header('Overall View')
+st.dataframe(subset)
        
    #left.header('Area Chart Visual')
    #left.area_chart(subset)
