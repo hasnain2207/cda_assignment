@@ -50,7 +50,7 @@ selection = st.multiselect(
 #subset = data[data['Year'] == selection]
 
 subset = data.query("Year == @selection")
-st.dataframe(subset)
+#st.dataframe(subset)
 
 col1.metric('Number of Participations', total_participations)
 col2.metric('Number of Olympians', total_olympians)
