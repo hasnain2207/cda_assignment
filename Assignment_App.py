@@ -44,7 +44,7 @@ Years = data['Year'].unique()
 #selection = st.multiselect('Select Year', Years)
 
 selection = st.multiselect(
-    "Select Type:",
+    "Select Year:",
         options = Years,
         default = Years)
 #subset = data[data['Year'] == selection]
