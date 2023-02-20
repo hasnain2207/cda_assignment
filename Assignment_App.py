@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Feb 11 22:58:33 2023
-
 @author: Hasnain
 """
 
@@ -29,16 +28,7 @@ data = pd.merge(df1, df2)
 
 data.info()
 #df = data.drop(['notes'],axis=1)
-
-total_participations = data['ID'].count()
-total_olympians = data['ID'].nunique()
-countries = data['NOC'].nunique()
-gold = data.Medal.value_counts().Gold
-silver = data.Medal.value_counts().Silver
-bronze = data.Medal.value_counts().Bronze
-
 st.header('Olympic History Dashboard')
-col1, col2, col3, col4, col5 = st.columns(5)
 Years = data['Year'].unique()
 #selection = st.multiselect('Select Year', Years)
 
@@ -49,9 +39,19 @@ selection = st.multiselect(
 #subset = data[data['Year'] == selection]
 drop_data = data.loc[:, ~data.columns.isin(['ID', 'notes'])]
 
-subset = drop_data.query("Year == @selection")
-#subset = data.query("Year == @selection")
-#st.dataframe(subset)
+subset1 = drop_data.query("Year == @selection")
+subset = data.query("Year == @selection")
+
+total_participations = subset['ID'].count()
+total_olympians = subset['ID'].nunique()
+countries = subset['NOC'].nunique()
+gold = subset.Medal.value_counts().Gold
+silver = subset.Medal.value_counts().Silver
+bronze = subset.Medal.value_counts().Bronze
+
+
+col1, col2, col3, col4, col5 = st.columns(5)
+
 
 col1.metric('Number of Participations', total_participations)
 col2.metric('Number of Olympians', total_olympians)
@@ -59,9 +59,9 @@ col3.metric('Gold Medals', gold)
 col4.metric('Silver Medals', silver)
 col5.metric('Bronze Medals', bronze)
 
-bar_data = data.groupby('Medal')['Name'].count().sort_values(ascending=False).head(10)
-#line_data = data.groupby('Year')['Medal'].count().sort_values(ascending=False).head(10)
-line_data = pd.crosstab(data['Year'], data['Medal'])
+bar_data = subset.groupby('Medal')['Name'].count().sort_values(ascending=False).head(10)
+#line_data = subset.groupby('Year')['Medal'].count().sort_values(ascending=False).head(10)
+line_data = pd.crosstab(subset['Year'], subset['Medal'])
 
 #st.dataframe(line_data)
 with st.container():
@@ -73,7 +73,7 @@ with st.container():
     left.bar_chart(bar_data)
         
 st.header('Overall View')
-st.dataframe(subset)
+st.dataframe(subset1)
        
    #left.header('Area Chart Visual')
    #left.area_chart(subset)
