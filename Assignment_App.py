@@ -47,8 +47,10 @@ selection = st.multiselect(
         options = Years,
         default = Years)
 #subset = data[data['Year'] == selection]
+drop_data = data.loc[:, ~data.columns.isin(['ID', 'notes'])]
 
-subset = data.query("Year == @selection")
+subset = drop_data.query("Year == @selection")
+#subset = data.query("Year == @selection")
 #st.dataframe(subset)
 
 col1.metric('Number of Participations', total_participations)
